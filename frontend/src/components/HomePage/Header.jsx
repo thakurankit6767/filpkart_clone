@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import { HeadData } from '../constant/data';
+import { HeadData } from '../../constant/data';
 
 
 const useStyle = makeStyles(theme => ({
