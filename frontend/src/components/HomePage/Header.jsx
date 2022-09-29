@@ -26,7 +26,7 @@ const useStyle = makeStyles(theme => ({
     }
 }));
 
-const NavBar = () => {
+const NavBarHeader = () => {
     const classes = useStyle();
     return (
         <Box className={classes.component}>
@@ -42,4 +42,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar;
+export default NavBarHeader;

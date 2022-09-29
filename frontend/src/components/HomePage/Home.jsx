@@ -8,7 +8,9 @@ import Slide from './Slide';
 import React,  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // hooks
 import storeData,{addCart} from "../../redux/data/action"
-import NavBar from './Header';
+import Navbar from '../Header/Navbar';
+import NavBarHeader from './Header';
+
 
 
 const useStyle = makeStyles({
@@ -38,7 +40,8 @@ console.log(data)
 
     return (
         <> 
-            <NavBar />
+            <Navbar/>
+            <NavBarHeader/>
             <Box className={classes.component}>
                 <Banner />
                 <MidSlide products={data} />
