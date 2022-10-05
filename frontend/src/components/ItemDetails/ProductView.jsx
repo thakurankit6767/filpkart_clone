@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //import * as React from 'react';
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import "./ProductView.css"
 import { Button } from "@material-ui/core";
 import { addCart } from "../../redux/data/action";
 
