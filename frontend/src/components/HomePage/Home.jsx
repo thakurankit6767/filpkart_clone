@@ -40,7 +40,7 @@ console.log(data)
 
     return (
         <> 
-            <Navbar/>
+            
             <NavBarHeader/>
             <Box className={classes.component}>
                 <Banner />
