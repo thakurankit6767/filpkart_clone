@@ -81,7 +81,7 @@ export default function Productdetails() {
                   </span>
                 </p>
                 <div id="button">
-                  <Button id="btn1" onClick={handleCart(idx)}>
+                  <Button id="btn1" onClick={handleCart(idx)} style={{backgroundColor:"red"}}>
                     add to cart
                   </Button>
                   <Button id="btn2">add to wishlist</Button>
