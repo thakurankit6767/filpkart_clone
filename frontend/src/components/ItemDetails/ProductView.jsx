@@ -178,6 +178,7 @@ export default function Productdetails() {
                     </TableRow>
                 </TableBody>
             </Table>
+            
 
                 
                 
