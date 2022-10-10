@@ -43,7 +43,7 @@ const useStyle = makeStyles({
 
 const theme = createTheme();
 
-export default function Productdetails() {
+export default function Productdetail() {
   var navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
@@ -51,11 +51,12 @@ export default function Productdetails() {
   console.log(idx);
 
   const classes = useStyle();
-  const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
-  const date = new Date(new Date().getTime()+(5*24*60*60*1000));
+  const adURL =
+    "https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50";
+  const date = new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000);
 
   const data = useSelector((state) => state.data.data);
-  console.log("product", data);
+  console.log("productlist", data);
 
   var po = data.filter((x) => {
     if (+x.id === +idx) {
@@ -150,40 +151,49 @@ export default function Productdetails() {
                 </Box>
 
                 <Table>
-                <TableBody>
+                  <TableBody>
                     <TableRow className={classes.smallText}>
-                        <TableCell className={classes.greyTextColor}>Delivery</TableCell>
-                        <TableCell style={{ fontWeight: 600 }}>Delivery by {date.toDateString()} | ₹40</TableCell>
+                      <TableCell className={classes.greyTextColor}>
+                        Delivery
+                      </TableCell>
+                      <TableCell style={{ fontWeight: 600 }}>
+                        Delivery by {date.toDateString()} | ₹40
+                      </TableCell>
                     </TableRow>
                     <TableRow className={classes.smallText}>
-                        <TableCell className={classes.greyTextColor}>Warranty</TableCell>
-                        <TableCell>No Warranty</TableCell>
+                      <TableCell className={classes.greyTextColor}>
+                        Warranty
+                      </TableCell>
+                      <TableCell>No Warranty</TableCell>
                     </TableRow>
                     <TableRow className={classes.smallText}>
-                        <TableCell className={classes.greyTextColor}>Seller</TableCell>
-                        <TableCell className={classes.smallText}>
-                            <span style={{ color: '#2874f0' }}>SuperComNet</span>
-                            <Typography>GST invoice available</Typography>
-                            <Typography>View more sellers starting from ₹329</Typography>
-                        </TableCell>
+                      <TableCell className={classes.greyTextColor}>
+                        Seller
+                      </TableCell>
+                      <TableCell className={classes.smallText}>
+                        <span style={{ color: "#2874f0" }}>SuperComNet</span>
+                        <Typography>GST invoice available</Typography>
+                        <Typography>
+                          View more sellers starting from ₹329
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell colSpan={2}>
-                            <img src={adURL} style={{ width: 390 }} alt="" />
-                        </TableCell>
+                      <TableCell colSpan={2}>
+                        <img src={adURL} style={{ width: 390 }} alt="" />
+                      </TableCell>
                     </TableRow>
                     <TableRow className={classes.smallText}>
-                        <TableCell className={classes.greyTextColor}>Description</TableCell>
-                        {/* <TableCell>{product.description}</TableCell> */}
+                      <TableCell className={classes.greyTextColor}>
+                        Description
+                      </TableCell>
+                      {/* <TableCell>{product.description}</TableCell> */}
                     </TableRow>
-                </TableBody>
-            </Table>
-            
+                  </TableBody>
+                </Table>
 
                 
-                
-                
-                <div id="content">
+                {/* <div id="content">
                   <input type="text" id="pin" placeholder="Enter a PIN code" />
                   <h5 style={{ marginTop: "1%" }}>
                     Please enter PIN code to check delivery time & Pay on
@@ -205,30 +215,30 @@ export default function Productdetails() {
                 <p>This product is already at its best price</p>
                 <ul>
                   <li>EMI option available</li>
-                </ul>
+                </ul> */}
 
                 <p style={{ color: "red", marginTop: "0px" }}>View Plan</p>
               </div>
             </div>
             <div className="imagediv">
-              <div className="imagedivimg">
+              {/* <div className="imagedivimg">
                 <img
                   style={{ width: "100%", height: "400px" }}
                   src={e.images.image2}
                 />
-              </div>
-              <div className="imagedivimg">
+              </div> */}
+              {/* <div className="imagedivimg">
                 <img
                   style={{ width: "100%", height: "400px" }}
                   src={e.images.image3}
                 />
-              </div>
-              <div className="imagedivimg">
+              </div> */}
+              {/* <div className="imagedivimg">
                 <img
                   style={{ width: "100%", height: "400px" }}
                   src={e.images.image4}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         );
