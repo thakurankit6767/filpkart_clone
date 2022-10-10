@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import { HeadData } from '../constant/data';
+import { HeadData } from '../../constant/data';
 
 
 const useStyle = makeStyles(theme => ({
@@ -26,13 +26,13 @@ const useStyle = makeStyles(theme => ({
     }
 }));
 
-const NavBar = () => {
+const NavBarHeader = () => {
     const classes = useStyle();
     return (
         <Box className={classes.component}>
             {
-                HeadData.map(temp => (
-                    <Box className={classes.container}>
+                HeadData.map((temp,index) => (
+                    <Box className={classes.container} key={index}>
                         <img src={temp.url} className={classes.image} alt="" />
                         <Typography className={classes.text}>{temp.text}</Typography>
                     </Box>
@@ -42,4 +42,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar;
+export default NavBarHeader;
