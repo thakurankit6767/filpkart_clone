@@ -1,4 +1,5 @@
-import { Button } from '@material-ui/core';
+
+import { Box, makeStyles, Typography, Button, Grid } from '@material-ui/core';
 import { ConstructionOutlined } from '@mui/icons-material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +7,48 @@ import { Link } from 'react-router-dom';
 import { decrementitem, deleteCart, incrementitem, removeallcart } from '../../redux/data/action';
 
 import "./cart.css"
+import CartItem from './CartItem';
+import EmptyCart from './EmptyCart';
+
+const useStyle = makeStyles(theme => ({
+  component: {
+      // marginTop: 55,
+      padding: '30px 135px',
+      display: 'flex',
+      [theme.breakpoints.down('sm')]: {
+          padding: '15px 0'
+      }
+  },
+  leftComponent: {
+      // width: '67%',
+      paddingRight: 15,
+      [theme.breakpoints.down('sm')]: {
+          marginBottom: 15
+      }
+  },
+  header: {
+      padding: '15px 24px',
+      background: '#fff'
+  },
+  bottom: {
+      padding: '16px 22px',
+      background: '#fff',
+      boxShadow: '0 -2px 10px 0 rgb(0 0 0 / 10%)',
+      borderTop: '1px solid #f0f0f0'
+  },
+  placeOrder: {
+      display: 'flex',
+      marginLeft: 'auto',
+      background: '#fb641b',
+      color: '#fff',
+      borderRadius: 2,
+      width: 250,
+      height: 51
+  }
+}));
+
 const Cart = () => {
+  const classes = useStyle();
  const [tprice,setTprice]=useState(0)
   const dispatch=useDispatch()
   const data = useSelector((state) => state.data.data);
@@ -42,41 +84,31 @@ const handlecartRemove=(idx)=>{
   }
 
 let x=cartproducts
-  return (
-    <>
-    <Button onClick={()=>handlecartDelete}>delete cart</Button>
-   
-    <div className='maincart'>
-    
-    
-    
-     
-     { x.map((e)=>{
       return(
-        <div key={e.id} className='cartdiv'>
-        <h1 className='title'>{e.brand}</h1>
-        
-        <img style={{width:"100%"}} src={e.images.image1} alt="producti"/>
-        <h2> Rs {e.price*e.quantity}</h2>
-        <br/>
-        <Button onClick={()=>{alert("payment")}}>Buy Product</Button>
-        <Button className='btns' onClick={()=>handlecartRemove(e.id)}>remove item</Button>
-        <button onClick={() => Additem(e.id)}>+</button>
-        <h2>quantity:{e.quantity}</h2>
-                {e.quantity > 1 ? (
-                  <button onClick={() => RemoveItem(e.id)}>-</button>
-                ) : null}
+        <>
+        {x.length ?
+        <Grid container className={classes.component}>
+          <Grid item lg={9} md={9} sm={12} xs={12} className={classes.leftComponent}>
+          <Box className={classes.header}>
+                        <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({x?.length})</Typography>
+                    </Box>
+                    { x.map((e)=>(
+                       <CartItem item={e} removeItemFromCart={handlecartRemove}/>
+                    ))
+}
+                      
 
-        </div>
+        
+                    
+     </Grid>
+        </Grid>:<EmptyCart/>
+     }
+        </>
+                
       )
-    })}
-    </div>
-    <button onClick={handlecartDelete}>delete all cart</button>
-    <button>
-        <Link to="/checkout">Proceed to checkout</Link>
-      </button>
-    </>
-  )
+  
+   
+  
 }
 
 export default Cart
