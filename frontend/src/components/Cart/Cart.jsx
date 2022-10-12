@@ -9,6 +9,7 @@ import { decrementitem, deleteCart, incrementitem, removeallcart } from '../../r
 import "./cart.css"
 import CartItem from './CartItem';
 import EmptyCart from './EmptyCart';
+import TotalView from './TotalView';
 
 const useStyle = makeStyles(theme => ({
   component: {
@@ -99,7 +100,9 @@ let x=cartproducts
                       
 
         
-                    
+<Grid item lg={3} md={3} sm={12} xs={12}>
+                    <TotalView cartItems={x} />
+                </Grid>         
      </Grid>
         </Grid>:<EmptyCart/>
      }
