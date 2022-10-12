@@ -43,7 +43,7 @@ const TotalView = ({ cartItems }) => {
         console.log(cartItems);
         cartItems.map(item => {
             price = price+(+item.price)
-            discount=+item.off-price
+            discount=item.price*0.02
         })
         setPrice(price);
         setDiscount(discount);

@@ -56,8 +56,8 @@ const CartItem = ({ item, removeItemFromCart }) => {
                 </Typography>
                 <Typography style={{margin: '20px 0'}}>
                     <span className={classes.pricex}>₹{item?.price}</span>&nbsp;&nbsp;&nbsp;
-                    <span className={classes.greyTextColor}><strike>₹{item?.price}</strike></span>&nbsp;&nbsp;&nbsp;
-                    <span style={{ color: '#388E3C' }}>{item?.price.discount} off</span>
+                    <span className={classes.greyTextColor}><strike>₹{(item?.price*1.2).toFixed(2)}</strike></span>&nbsp;&nbsp;&nbsp;
+                    <span style={{ color: '#388E3C' }}>20% off</span>
                 </Typography>
                 <Button className={classes.remove} onClick={() => removeItemFromCart(item?.id)}>Remove</Button>
             </Box>
