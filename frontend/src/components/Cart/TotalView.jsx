@@ -42,8 +42,8 @@ const TotalView = ({ cartItems }) => {
         var price = 0, discount = 0;
         console.log(cartItems);
         cartItems.map(item => {
-            price = price+(+item.price)
-            discount=item.price*0.02
+            price = price+(+item.price*item.quantity)
+            discount=item.price*0.02*item.quantity
         })
         setPrice(price);
         setDiscount(discount);
@@ -65,7 +65,7 @@ const TotalView = ({ cartItems }) => {
                 <Typography>Discount<span className={classes.price}>-₹{discount}</span></Typography>
                 <Typography>Delivery Charges<span className={classes.price}>₹40</span></Typography>
                 <Typography className={classes.totalAmount}>Total Amount<span className={classes.price}>₹{price - discount + 40}</span></Typography>
-                <Typography style={{fontSize: 16, color: 'green'}}>You will save ₹{discount - 40} on this order</Typography>
+                <Typography style={{fontSize: 16, color: 'green'}}>You will save ₹{(discount).toFixed(2)} on this order</Typography>
             </Box>
         </Box>
     )
