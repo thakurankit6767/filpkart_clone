@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Cart from "./components/Cart/Cart";
+import Footer from "./components/footer/Footer";
 import Navbar from "./components/Header/Navbar";
 import Home from "./components/HomePage/Home";
 import ProductDetail from "./components/ItemDetails/ProductDetail";
@@ -14,6 +15,7 @@ function App() {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/product/:id" element={<ProductDetail />}></Route>
       </Routes>
+      <Footer/>
     </div>
   );
 }
