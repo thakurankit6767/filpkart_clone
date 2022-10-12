@@ -47,7 +47,7 @@ const CartItem = ({ item, removeItemFromCart }) => {
         <Card className={classes.component}>
             <Box className={classes.leftComponent}>
                 <img src={item?.images.image1} className={classes.image} alt="" />
-                <GroupButton />
+                <GroupButton item={item}/>
             </Box>
             <Box className={classes.mid}>
                 <Typography>{item?.title}</Typography>
@@ -55,8 +55,8 @@ const CartItem = ({ item, removeItemFromCart }) => {
                     <span><img src={fassured} style={{ width: 50, marginLeft: 10 }} alt="" /></span>
                 </Typography>
                 <Typography style={{margin: '20px 0'}}>
-                    <span className={classes.pricex}>₹{item?.price}</span>&nbsp;&nbsp;&nbsp;
-                    <span className={classes.greyTextColor}><strike>₹{(item?.price*1.2).toFixed(2)}</strike></span>&nbsp;&nbsp;&nbsp;
+                    <span className={classes.pricex}>₹{item.quantity*item?.price}</span>&nbsp;&nbsp;&nbsp;
+                    <span className={classes.greyTextColor}><strike>₹{(item.quantity*(item?.price*1.2)).toFixed(2)}</strike></span>&nbsp;&nbsp;&nbsp;
                     <span style={{ color: '#388E3C' }}>20% off</span>
                 </Typography>
                 <Button className={classes.remove} onClick={() => removeItemFromCart(item?.id)}>Remove</Button>
