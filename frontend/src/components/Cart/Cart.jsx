@@ -45,7 +45,12 @@ const useStyle = makeStyles(theme => ({
     borderRadius: 2,
     width: 250,
     height: 51
-  }
+  },
+  remove: {
+    marginTop: 20,
+    fontSize: 16,
+    backgroundColor:'red'
+}
 }));
 
 const Cart = () => {
@@ -104,6 +109,7 @@ const Cart = () => {
               <TotalView cartItems={x} />
             </Grid>
           </Grid>
+          <Button className={classes.remove} onClick={() => handlecartDelete()}>Remove All cart items</Button>
         </Grid> : <EmptyCart />
       }
     </>
