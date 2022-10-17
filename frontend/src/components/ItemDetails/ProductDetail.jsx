@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-//import * as React from 'react';
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "./ProductView.css";
-import { Button } from "@material-ui/core";
 import { addCart } from "../../redux/data/action";
-
+import { Button } from "@material-ui/core";
+import { ShoppingCart as Cart, FlashOn as Flash } from "@material-ui/icons";
 import {
   Box,
+  Grid,
   Typography,
   makeStyles,
   Table,
@@ -19,18 +17,62 @@ import {
 } from "@material-ui/core";
 import { LocalOffer as Badge } from "@material-ui/icons";
 
-const useStyle = makeStyles({
-  smallText: {
-    fontSize: 14,
-    verticalAlign: "baseline",
+const useStyle = makeStyles((theme) => ({
+  leftContainer: {
+    minWidth: "40%",
+    // textAlign: 'center',
+    padding: "40px 0 0 80px",
+    [theme.breakpoints.down("md")]: {
+      padding: "20px 40px",
+    },
+  },
+  productImage: {
+    padding: "15px 20px",
+    border: "1px solid #f0f0f0",
+    width: "95%",
+    marginTop: 30
+  },
+  button: {
+    width: "46%",
+    borderRadius: 2,
+    height: 50,
+  },
+  addToCart: {
+    background: "#ff9f00",
+    color: "#FFF",
+  },
+  buyNow: {
+    background: "#fb641b",
+    color: "#FFF",
+  },
+  component: {
+    marginTop: 55,
+    background: "#F2F2F2",
+  },
+  container: {
+    background: "#FFFFFF",
+    // margin: '0 80px',
+    display: "flex",
+    [theme.breakpoints.down("md")]: {
+      margin: 0,
+    },
+  },
+  rightContainer: {
+    marginTop: 80,
     "& > *": {
-      fontSize: 14,
       marginTop: 10,
     },
+  },
+  price: {
+    fontSize: 28,
+  },
+  smallText: {
+    fontSize: 14,
   },
   greyTextColor: {
     color: "#878787",
   },
+
   badge: {
     marginRight: 10,
     color: "#00CC00",
@@ -39,7 +81,16 @@ const useStyle = makeStyles({
   wrapper: {
     display: "flex",
   },
-});
+
+  smallTextDetail: {
+    fontSize: 14,
+    verticalAlign: "baseline",
+    "& > *": {
+      fontSize: 14,
+      marginTop: 10,
+    },
+  },
+}));
 
 const theme = createTheme();
 
@@ -48,6 +99,8 @@ export default function Productdetail() {
   const params = useParams();
   const dispatch = useDispatch();
   const idx = params.id;
+  const fassured =
+    "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
   console.log(idx);
 
   const classes = useStyle();
@@ -64,6 +117,7 @@ export default function Productdetail() {
     }
   });
   console.log("po", po);
+  
   const handleCart = (idx) => {
     data.forEach((e) => {
       if (e.id == idx) {
@@ -72,60 +126,84 @@ export default function Productdetail() {
     });
   };
 
-  // var items = data.find((e) => {
-  //   if (data.id == idx) {
-  //     return e;
-  //   }
-  // });
-  //console.log("par",items);
+  // const buyNow = async () => {
+  //   loadRazorpay(600);
+  // };
+
+  // const addItemToCart = () => {
+  //    dispatch(addToCart(id, quantity));
+  //    history.push('/cart');
+  // };
+
+  var items = data.find((e) => {
+    if (data.id == idx) {
+      return e;
+    }
+  });
+  console.log("par",items);
   return (
     <div>
       {po.map((e) => {
         return (
-          <div>
-            <div id="main">
-              <div id="clicked_data">
-                <img src={e.images.image1} />
-              </div>
-              <div id="right_box">
-                <h2>{e.brand}</h2>
-                <h3 style={{ color: "#908680" }}>{e.title}</h3>
-                <h3>
-                  Rs. {e.price} <span id="do">{e.off_price}</span>
-                  {e.discount} % off{" "}
-                </h3>
-
-                <h5 style={{ color: "#1eb0a0" }}></h5>
-                <h5>SELECT SIZE</h5>
-                <p style={{ fontWeight: "600", fontSize: "20px" }}>
-                  {" "}
-                  <span
-                    style={{ border: "1px solid", padding: "1% 3%" }}
-                    className="ml-3"
+          <Box>
+            <Grid container className={classes.container}>
+              <Grid item lg={4} md={4} sm={8} xs={12}>
+                <Box className={classes.leftContainer}>
+                  <img
+                    src={e.images.image1}
+                    className={classes.productImage}
+                    alt=""
+                  />
+                  <br />
+                  <Button
+                    onClick={() => handleCart(idx)}
+                    className={(classes.button, classes.addToCart)}
+                    style={{ marginRight: 10 }}
+                    variant="contained"
                   >
-                    M
-                  </span>{" "}
-                  <span
-                    style={{ border: "1px solid", padding: "1% 4%" }}
-                    className="ml-2"
-                  >
-                    L
-                  </span>{" "}
-                  <span
-                    style={{ border: "1px solid", padding: "1% 3%" }}
-                    className="ml-2"
-                  >
-                    XL
-                  </span>
-                </p>
-                <div id="button">
-                  <Button id="btn1" onClick={handleCart(idx)}>
-                    add to cart
+                    <Cart />
+                    Add to Cart
                   </Button>
-                  <Button id="btn2">add to wishlist</Button>
-                </div>
-
-                
+                  <Button
+                    // onClick={() => buyNow()}
+                    className={(classes.button, classes.buyNow)}
+                    variant="contained"
+                  >
+                    <Flash /> Buy Now
+                  </Button>
+                </Box>
+              </Grid>
+              <Grid
+                item
+                lg={8}
+                md={8}
+                sm={8}
+                xs={12}
+                className={classes.rightContainer}
+              >
+                <Typography>{e.title}</Typography>
+                <Typography
+                  className={(classes.greyTextColor, classes.smallText)}
+                  style={{ marginTop: 5 }}
+                >
+                  8 Ratings & 1 Reviews
+                  <span>
+                    <img
+                      src={fassured}
+                      style={{ width: 77, marginLeft: 20 }}
+                      alt=""
+                    />
+                  </span>
+                </Typography>
+                <Typography>
+                  <span className={classes.price}>₹{e.price}</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span className={classes.greyTextColor}>
+                    <strike>₹{e.off_price}</strike>
+                  </span>
+                  &nbsp;&nbsp;&nbsp;
+                  <span style={{ color: "#388E3C" }}>{e.discount}% off</span>
+                </Typography>
                 <Typography>Available offers</Typography>
                 <Box className={classes.smallText}>
                   <Typography>
@@ -152,7 +230,7 @@ export default function Productdetail() {
 
                 <Table>
                   <TableBody>
-                    <TableRow className={classes.smallText}>
+                    <TableRow className={classes.smallTextDetail}>
                       <TableCell className={classes.greyTextColor}>
                         Delivery
                       </TableCell>
@@ -160,17 +238,17 @@ export default function Productdetail() {
                         Delivery by {date.toDateString()} | ₹40
                       </TableCell>
                     </TableRow>
-                    <TableRow className={classes.smallText}>
+                    <TableRow className={classes.smallTextDetail}>
                       <TableCell className={classes.greyTextColor}>
                         Warranty
                       </TableCell>
                       <TableCell>No Warranty</TableCell>
                     </TableRow>
-                    <TableRow className={classes.smallText}>
+                    <TableRow className={classes.smallTextDetail}>
                       <TableCell className={classes.greyTextColor}>
                         Seller
                       </TableCell>
-                      <TableCell className={classes.smallText}>
+                      <TableCell className={classes.smallTextDetail}>
                         <span style={{ color: "#2874f0" }}>SuperComNet</span>
                         <Typography>GST invoice available</Typography>
                         <Typography>
@@ -183,64 +261,17 @@ export default function Productdetail() {
                         <img src={adURL} style={{ width: 390 }} alt="" />
                       </TableCell>
                     </TableRow>
-                    <TableRow className={classes.smallText}>
+                    <TableRow className={classes.smallTextDetail}>
                       <TableCell className={classes.greyTextColor}>
                         Description
                       </TableCell>
-                      {/* <TableCell>{product.description}</TableCell> */}
+                      <TableCell>{e.desc}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
-
-                
-                {/* <div id="content">
-                  <input type="text" id="pin" placeholder="Enter a PIN code" />
-                  <h5 style={{ marginTop: "1%" }}>
-                    Please enter PIN code to check delivery time & Pay on
-                    Delivery Availability
-                  </h5>
-
-                  <ul>
-                    <li>100% Original Products</li>
-                    <li>Pay on delivery might be available</li>
-                    <li>Easy 15 days returns and exchanges</li>
-                    <li>Try & Buy might be available</li>
-                    <li>Regular fit</li>
-
-                    <li>Polo with classic collar</li>
-                    <li>Hand wash</li>
-                  </ul>
-                </div>
-                <h3>BEST OFFERS</h3>
-                <p>This product is already at its best price</p>
-                <ul>
-                  <li>EMI option available</li>
-                </ul> */}
-
-                <p style={{ color: "red", marginTop: "0px" }}>View Plan</p>
-              </div>
-            </div>
-            <div className="imagediv">
-              {/* <div className="imagedivimg">
-                <img
-                  style={{ width: "100%", height: "400px" }}
-                  src={e.images.image2}
-                />
-              </div> */}
-              {/* <div className="imagedivimg">
-                <img
-                  style={{ width: "100%", height: "400px" }}
-                  src={e.images.image3}
-                />
-              </div> */}
-              {/* <div className="imagedivimg">
-                <img
-                  style={{ width: "100%", height: "400px" }}
-                  src={e.images.image4}
-                />
-              </div> */}
-            </div>
-          </div>
+              </Grid>
+            </Grid>
+          </Box>
         );
       })}
     </div>
