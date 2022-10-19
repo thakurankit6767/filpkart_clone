@@ -62,7 +62,7 @@ const TotalView = ({ cartItems }) => {
             </Box>
             <Box className={clsx(classes.header, classes.container)}>
                 <Typography>Price ({cartItems?.length} item)<span className={classes.price}>₹{price}</span></Typography>
-                <Typography>Discount<span className={classes.price}>-₹{discount}</span></Typography>
+                <Typography>Discount<span className={classes.price}>-₹{(discount).toFixed(2)}</span></Typography>
                 <Typography>Delivery Charges<span className={classes.price}>₹40</span></Typography>
                 <Typography className={classes.totalAmount}>Total Amount<span className={classes.price}>₹{price - discount + 40}</span></Typography>
                 <Typography style={{fontSize: 16, color: 'green'}}>You will save ₹{(discount).toFixed(2)} on this order</Typography>
